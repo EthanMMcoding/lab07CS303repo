@@ -4,19 +4,14 @@ package lab07CS303repo;
 
 public class BinarySearchTree {
 
-    public static BinarySearchNode root = null; // a static variable, the root will be the same for the whole tree
+    public BinarySearchNode root = null; // a static variable, the root will be the same for the whole tree
 
     BinarySearchTree(){}
 
-    /*returns the root node of the tree */
-    public BinarySearchNode getRoot(){ // method to return the root of the tree
-        return root;
-    }
-
     /*inserts a node into its correct place in the tree */
-    public static void treeInsert(BinarySearchTree tree, BinarySearchNode node){
+    public void treeInsert(BinarySearchTree tree, BinarySearchNode node){
         BinarySearchNode y = null;
-        BinarySearchNode x = root;
+        BinarySearchNode x = this.root;
         while(x != null){
             y = x;
             if(node.getKey() < x.getKey()){
@@ -27,18 +22,18 @@ public class BinarySearchTree {
             }
         }
         // is it necessary to assign the new nodes parent to y? 
-
+        node.setParent(y);
         if(y == null){
-            root = node;
-            System.out.println("root value: "+ root.getValue());
+            this.root = node;
+            System.out.println("root value: "+ this.root.getValue());
         }
         else if(node.getKey() < y.getKey()){
-            y.setLeftChild(node);
-            System.out.println("value of the parent of the new left node: "+ y.getValue());
+            y.setLeftChild(node); //LCP == left child parent, RCP == right child parent
+            // System.out.println("LCP key: " + y.getKey() +" LCP value: "+ y.getValue());
         }
         else{
             y.setRightChild(node);;
-            System.out.println("Value of the parent of the new right node: " +y.getValue());
+            // System.out.println("RCP key: " + y.getKey() + " RCP value: " + y.getValue());
         }
     }
 
@@ -51,7 +46,7 @@ public class BinarySearchTree {
         }
     }
     /* method to search for a specific node*/ 
-    public BinarySearchNode iterativeTreeSearch(BinarySearchNode rootNode, int key){
+    public BinarySearchNode iterativeTreeSearch(BinarySearchNode rootNode, long key){
         while(rootNode != null && key != rootNode.getKey()){
             if(key < rootNode.getKey()){
                 rootNode = rootNode.getLeftChild();
@@ -61,5 +56,10 @@ public class BinarySearchTree {
             }
         }
         return rootNode;
+    }
+
+    /*returns the root node of the tree */
+    public BinarySearchNode getRoot(){ 
+        return root;
     }
 }
