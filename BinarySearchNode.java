@@ -2,17 +2,18 @@ package lab07CS303repo;
 
 public class BinarySearchNode {
 
-    private int key;
-    private BinarySearchNode left = null; // act like the pointers to the child nodes
+    private long key;
+    private BinarySearchNode left = null; //the pointers to the child nodes, implementing a linked list
     private BinarySearchNode right = null;
+    private BinarySearchNode parent = null;
     private String value;
 
-    BinarySearchNode(int key, String value){
+    BinarySearchNode(long key, String value){
         this.key = key;
         this.value = value;
     }
 
-    public int getKey(){
+    public long getKey(){
         return key;
     }
 
@@ -20,6 +21,9 @@ public class BinarySearchNode {
         return value;
     }
 
+    public BinarySearchNode getParent(){
+        return parent;
+    }
     public BinarySearchNode getLeftChild() {
         return left;
     }
@@ -28,6 +32,9 @@ public class BinarySearchNode {
         return right;
     }
 
+    public void setParent(BinarySearchNode parent){
+        this.parent = parent;
+    }
     public void setLeftChild(BinarySearchNode left) { //set a node to be this nodes left child
         this.left = left;
     }
