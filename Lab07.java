@@ -14,8 +14,16 @@ public class Lab07 {
         CSVFileReader fileReader = new CSVFileReader(17);
 
         // fileReader.readFile("input.dat", 17);
-        fileReader.printArray(fileReader.readFile("input.dat", 17));
-        System.out.println("Value from the string array: " + fileReader.getValueFromArray(0));
+        // int fileArrLength = fileReader.readFile("input.dat").length;
+        fileReader.printList(fileReader.readFile("input.dat"));
+        // for(int i = 0; i < fileArrLength; i++){
+            // System.out.println(fileReader.readFile("input.dat")[i]);
+            // for(int k = 0; k < fileReader.readFile("input.dat")[i]; k++)
+        // }
+        // for(int i = 0; i < data.size(); i++){
+        //     if(isInteger(data.get(i)));
+        // }
+        // System.out.println((fileReader.readFile("input.dat")[0].getClass()));
 
         BinarySearchTree.treeInsert(tree, root);
         BinarySearchTree.treeInsert(tree, node1);
