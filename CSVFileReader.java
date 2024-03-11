@@ -1,37 +1,30 @@
 package lab07CS303repo;
 
 import java.io.*;
-// import java.lang.reflect.Array;
 import java.util.*;
 
 /*This class will read CSV file into an array delimiting by 2*/
 
 public class CSVFileReader {
 
-    private static String[] array;
-    private List<List<String>> listOfLists = new ArrayList<>();
+    private List<String[]> listOfArrays = new ArrayList<>();
 
-    CSVFileReader(int arraySize){
-        array = new String[arraySize];
+    CSVFileReader(){
     }
 
-    public List<List<String>> readFile(String fileName)throws IOException{
+    /* readFile takes a file, reads it line by line into arrays, and stores those arrays into a list */
+    public List<String[]> readFile(String fileName)throws IOException{
 
         BufferedReader csvFileReader = new BufferedReader(new FileReader(fileName));
 
         try{
             String line = csvFileReader.readLine();
+            String[] lineData = new String[2]; //size 2 because I want to store each key value pair in the file in an array
             while(line != null){
-                List<String> lineData = Arrays.asList(line.split(",", 2));
-                listOfLists.add(lineData);
+                lineData = line.trim().split(",", 2);
+                listOfArrays.add(lineData);
                 line = csvFileReader.readLine();
             }
-            for(List<String> list : listOfLists){
-                for(String str : list){
-                    System.out.println(str + " ");
-                }
-            }
-
         }
         catch(FileNotFoundException e){
             e.printStackTrace();
@@ -40,27 +33,31 @@ public class CSVFileReader {
         finally{
             csvFileReader.close();
         }
-
-        return listOfLists;
+        
+        return listOfArrays;
     }
 
-    // public void printListOfListValues(List<List<String>> data){
-    //     for(List<String> list : data){
-    //         for(String str : list){
-    //             System.out.println(str + " ");
-    //         }
-    //     }
-    // }
-
-    public String getValueFromArray(int index){
-        return array[index];
+    /*print out each individual array stored in the list, prints hexadecimal value */
+    public void printListOfArrays(List<String[]> listOfArrays){
+        System.out.println(listOfArrays);
+        for(int i = 0; i < listOfArrays.size(); i++){
+            System.out.println(listOfArrays.get(i));
+        }
     }
 
-    public void printList(List<List<String>> listOflists){
-        System.out.println(listOflists);
+    public void printListOfArrays(){
+        for(String[] arr : listOfArrays){
+            for(String str : arr){
+                System.out.println(str + " ");
+            }
+        }
     }
 
-    public List<List<String>> getListOfLists(){
-        return listOfLists;
+    public List<String[]> getListOfArrays(){
+        return this.listOfArrays;
+    }
+
+    public int getListArrSize(){
+        return this.listOfArrays.size();
     }
 }
