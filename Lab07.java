@@ -17,7 +17,7 @@ public class Lab07 {
         for(String[] e : fileList){ // loop over the file list
             // BinarySearchNode parentNode = new BinarySearchNode(Integer.parseInt(fileList.get(i)[0]), fileList.get(i)[1]);
             BinarySearchNode newNode = new BinarySearchNode(Long.parseLong(e[0]), e[1]); // create a new node from each array in the list
-            
+
             // i++;
             // newNode.setParent(newNode);
 
@@ -25,10 +25,11 @@ public class Lab07 {
         }
         BinarySearchNode CSVTreeRoot = CSVTree.getRoot(); 
         CSVTree.inOrderTreeWalk(CSVTreeRoot);
+        System.out.println(CSVTree.iterativeTreeSearch(CSVTreeRoot, 28800290919L).getParent());
         System.out.println(CSVTree.getRoot());
         System.out.println(CSVTreeRoot);
         System.out.println(CSVTreeRoot.getRightChild());
-        System.out.println(CSVTreeRoot.getRightChild().getRightChild());
+        System.out.println(CSVTreeRoot.getRightChild().getParent());
 
         {
             // BinarySearchTree tree = new BinarySearchTree();
