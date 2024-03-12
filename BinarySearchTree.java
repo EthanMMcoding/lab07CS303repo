@@ -1,5 +1,7 @@
 package lab07CS303repo;
 
+import java.io.IOError;
+
 /* this class will handle the methods for binary search trees */
 
 public class BinarySearchTree {
@@ -25,7 +27,7 @@ public class BinarySearchTree {
         node.setParent(y);
         if(y == null){
             this.root = node;
-            System.out.println("root value: "+ this.root.getValue());
+            // System.out.println("root value: "+ this.root.getValue());
         }
         else if(node.getKey() < y.getKey()){
             y.setLeftChild(node); //LCP == left child parent, RCP == right child parent
@@ -40,12 +42,25 @@ public class BinarySearchTree {
     /* method to print the keys in ascending order starting from the given node*/
     public void inOrderTreeWalk(BinarySearchNode rootNode){
         if(rootNode != null){
-            inOrderTreeWalk(rootNode.getLeftChild());
-            System.out.println(rootNode.getKey());
-            inOrderTreeWalk(rootNode.getRightChild());
+            try{
+                if(rootNode.getLeftChild() != null){
+                    inOrderTreeWalk(rootNode.getLeftChild());
+                }
+                // inOrderTreeWalk(rootNode.getLeftChild());
+                System.out.println(rootNode.getKey());
+                if(rootNode.getRightChild() != null){
+                    inOrderTreeWalk(rootNode.getRightChild());
+                }
+                else{
+                    System.out.println("End of tree.");
+                }
+            }
+            catch(StackOverflowError e){
+                System.out.println("Stack overflow");
+            }   
         }
     }
-    /* method to search for a specific node*/ 
+    /* method to search for a specific node from a specific node (should be root)*/ 
     public BinarySearchNode iterativeTreeSearch(BinarySearchNode rootNode, long key){
         while(rootNode != null && key != rootNode.getKey()){
             if(key < rootNode.getKey()){
