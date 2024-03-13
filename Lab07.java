@@ -10,7 +10,7 @@ public class Lab07 {
         BinarySearchTree CSVTree = new BinarySearchTree(); // tree for the CSV file
         CSVFileReader fileReader = new CSVFileReader(); // file reader object that will read the csv file into a list of arrays 
 
-        fileReader.readFile("UPC_lab07.csv"); // read the csv file into a list of arrays
+        fileReader.readFile("UPC.csv"); // read the csv file into a list of arrays
         
         List<String[]> fileList = fileReader.getListOfArrays(); // the list storing the arrays of values from the file
         // int i = -1;
