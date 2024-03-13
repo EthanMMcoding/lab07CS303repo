@@ -1,6 +1,6 @@
 package lab07CS303repo;
 
-import java.io.IOError;
+import java.util.Stack;
 
 /* this class will handle the methods for binary search trees */
 
@@ -22,15 +22,14 @@ public class BinarySearchTree {
             else{
                 x = x.getRightChild();
             }
-        }
-        // is it necessary to assign the new nodes parent to y? 
+        } 
         node.setParent(y);
         if(y == null){
             this.root = node;
             // System.out.println("root value: "+ this.root.getValue());
         }
         else if(node.getKey() < y.getKey()){
-            y.setLeftChild(node); //LCP == left child parent, RCP == right child parent
+            y.setLeftChild(node); //LCP == left child parent, RCP == right child parent, just used to see if both were working
             // System.out.println("LCP key: " + y.getKey() +" LCP value: "+ y.getValue());
         }
         else{
@@ -39,6 +38,31 @@ public class BinarySearchTree {
         }
     }
 
+    /* inOrderTreeWalk iteratively using a stack */
+    // public void inOrderTreeWalk(BinarySearchNode rootNode){
+    //     Stack<BinarySearchNode> nodeStack= new Stack<>();
+    //     BinarySearchNode parentNode = null;
+
+    //     while(rootNode != null){
+    //         parentNode = rootNode.getParent();
+    //         rootNode = rootNode.getRightChild();
+    //     }
+    //     nodeStack.push(rootNode);
+    //     rootNode = parentNode;
+    //     while(rootNode != null){
+    //         nodeStack.push(rootNode);
+    //         while(rootNode.getLeftChild() != null){
+    //             rootNode = rootNode.getLeftChild();
+    //         }
+    //     }
+        // while(rootNode != null){
+        //     rootNode = rootNode.getLeftChild();
+        // }
+        // while(rootNode != null){
+        //     rootNode = rootNode.getParent()
+        // }
+
+    // }
     /* method to print the keys in ascending order starting from the given node*/
     public void inOrderTreeWalk(BinarySearchNode rootNode){
         if(rootNode != null){
@@ -51,15 +75,13 @@ public class BinarySearchTree {
                 if(rootNode.getRightChild() != null){
                     inOrderTreeWalk(rootNode.getRightChild());
                 }
-                else{
-                    System.out.println("End of tree.");
-                }
             }
             catch(StackOverflowError e){
                 System.out.println("Stack overflow");
             }   
         }
     }
+
     /* method to search for a specific node from a specific node (should be root)*/ 
     public BinarySearchNode iterativeTreeSearch(BinarySearchNode rootNode, long key){
         while(rootNode != null && key != rootNode.getKey()){
