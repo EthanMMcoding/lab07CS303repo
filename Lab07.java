@@ -7,47 +7,58 @@ public class Lab07 {
     
     public static void main(String[] args)throws IOException {
 
-        BinarySearchTree CSVTree = new BinarySearchTree(); // tree for the CSV file
-        CSVFileReader fileReader = new CSVFileReader(); // file reader object that will read the csv file into a list of arrays 
+        BinarySearchTree CSVTree = new BinarySearchTree(); // tree for the CSV random file
+        BinarySearchTree UPCLab7Tree = new BinarySearchTree(); // using this tree for the lab7 CSV file 
 
-        fileReader.readFile("UPC.csv"); // read the csv file into a list of arrays
+        CSVFileReader UPCReader = new CSVFileReader(); // file reader object that will read the UPC file into a list of arrays 
+        CSVFileReader inputDat = new CSVFileReader(); // for reading the inputDat file
+        CSVFileReader UPCLab7Reader = new CSVFileReader(); //read the file into a list of arrays
+
+        UPCReader.readFile("UPC-random.csv", ",", 2, 2); // read the csv file into a list of arrays
+        inputDat.readFile("input.dat", ",", 2, 2);
+        UPCLab7Reader.readFile("UPC_lab07.csv", ",", 2, 2);
         
-        List<String[]> fileList = fileReader.getListOfArrays(); // the list storing the arrays of values from the file
-        // int i = -1;
-        for(String[] e : fileList){ // loop over the file list
-            // BinarySearchNode parentNode = new BinarySearchNode(Integer.parseInt(fileList.get(i)[0]), fileList.get(i)[1]);
-            BinarySearchNode newNode = new BinarySearchNode(Long.parseLong(e[0]), e[1]); // create a new node from each array in the list
+        List<String[]> UPCList = UPCReader.getListOfArrays(); // list storing file list data
+        List<String[]> inputDatList = inputDat.getListOfArrays(); //list storing inputDat data
+        List<String[]> UPCLab7List = UPCLab7Reader.getListOfArrays(); // store the list of arrays
 
-            // i++;
-            // newNode.setParent(newNode);
+        for(String[] e : UPCList){ // loop over the file list
+            BinarySearchNode newNode = new BinarySearchNode(Long.parseLong(e[0]), e[1]); // create a new node from each array in the list
 
             CSVTree.treeInsert(CSVTree, newNode); // insert the node into the tree
         }
-        BinarySearchNode CSVTreeRoot = CSVTree.getRoot(); 
+
+        for(String[] p : UPCLab7List){
+            BinarySearchNode nextNode = new BinarySearchNode(Long.parseLong(p[0]), p[1]);
+            UPCLab7Tree.treeInsert(UPCLab7Tree, nextNode);
+        }
+        
+        BinarySearchNode CSVTreeRoot = CSVTree.getRoot(); // variable to hold root of tree
         CSVTree.inOrderTreeWalk(CSVTreeRoot);
+        // CSVTree.iterativeInOrderTreeWalk(CSVTreeRoot);
+        /*here are a series a of tests */
+        System.out.println("The total number of objects in the tree: " + CSVTree.getCount());
         System.out.println(CSVTree.iterativeTreeSearch(CSVTreeRoot, 28800290919L).getParent());
         System.out.println(CSVTree.getRoot());
         System.out.println(CSVTreeRoot);
+        System.out.println(CSVTreeRoot.getLeftChild());
         System.out.println(CSVTreeRoot.getRightChild());
         System.out.println(CSVTreeRoot.getRightChild().getParent());
+        System.out.println(CSVTree.iterativeTreeSearch(CSVTreeRoot, 2158769549L));
 
-        {
-            // BinarySearchTree tree = new BinarySearchTree();
-            // BinarySearchNode root = new BinarySearchNode(2, "beren");
-            // BinarySearchNode node1 = new BinarySearchNode(6, "dior");
-            // BinarySearchNode node2 = new BinarySearchNode(4, "elwing");
-    
-            // tree.treeInsert(tree, root);
-            // tree.treeInsert(tree, node1);
-            // tree.treeInsert(tree, node2);
-    
-    
-            // System.out.println(tree.getRoot());
-            // System.out.println(root.getRightChild());
-            // System.out.println(node1.getLeftChild());
-    
-            // tree.inOrderTreeWalk(root);
-            // System.out.println(tree.iterativeTreeSearch(root, 4));
+        /*for loop testing search on each key in the inputDat file and printing the run time */
+        for(String[] z : inputDatList){
+            long startTime = System.nanoTime();
+            CSVTree.iterativeTreeSearch(CSVTree.getRoot(), Long.parseLong(z[0]));
+            long runTime = System.nanoTime() - startTime;
+            System.out.printf("The run time when searching for key: %d in the random file is %dns\n", Long.parseLong(z[0]), runTime);
+        }
+
+        for(String[] n : inputDatList){
+            long startTime = System.nanoTime();
+            CSVTree.iterativeTreeSearch(UPCLab7Tree.getRoot(), Long.parseLong(n[0]));
+            long runTime = System.nanoTime() - startTime;
+            System.out.printf("The run time when searching for key: %d in the sorted file is %dns\n", Long.parseLong(n[0]), runTime);
         }
     
     }
