@@ -5,34 +5,34 @@ public class BinarySearchNode {
     private long key;
     private BinarySearchNode left = null; //the pointers to the child nodes, implementing a linked list
     private BinarySearchNode right = null;
-    private BinarySearchNode parent = null;
+    private BinarySearchNode parent = null; //pointer to the parent to make it a doubly linked list
     private String value;
 
-    BinarySearchNode(long key, String value){
+    BinarySearchNode(long key, String value){ //create a new node
         this.key = key;
         this.value = value;
     }
 
-    public long getKey(){
+    public long getKey(){ //get key of the node
         return key;
     }
 
-    public String getValue(){
+    public String getValue(){ //get value of the node
         return value;
     }
 
-    public BinarySearchNode getParent(){
+    public BinarySearchNode getParent(){ //get parent of the node
         return parent;
     }
-    public BinarySearchNode getLeftChild() {
+    public BinarySearchNode getLeftChild() { //get left child of the node
         return left;
     }
 
-    public BinarySearchNode getRightChild() {
+    public BinarySearchNode getRightChild() { //get right child of the node
         return right;
     }
 
-    public void setParent(BinarySearchNode parent){
+    public void setParent(BinarySearchNode parent){ //set the parent of a node
         this.parent = parent;
     }
     public void setLeftChild(BinarySearchNode left) { //set a node to be this nodes left child
@@ -44,7 +44,7 @@ public class BinarySearchNode {
     }
     
     @Override
-    public String toString() {
+    public String toString() { //to string overridden to give a string value for each node
         return "key: " + this.getKey() + " value: " + this.getValue();
     }
 
